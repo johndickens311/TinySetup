@@ -22,6 +22,9 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
+if [[ $EUID -ne 0 ]]; then
+	echo "Run this as root!"
+	exit 100
 
 echo "Enter the node number of this pi followed by [ENTER]: "
 read pi_number
@@ -34,7 +37,7 @@ pi_name="pi$pi_number"
 echo "Installing system software and updates"
 sudo apt-get -y update
 sudo apt-get -y upgrade
-sudo apt-get -y install vim mpich2 xboxdrv libglew-dev sshpass libav-tools
+sudo apt-get -y install vim mpich xboxdrv libglew-dev sshpass libav-tools
 
 echo "Setting computer name"
 for file in \
